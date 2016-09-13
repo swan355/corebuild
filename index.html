@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>CORE BUILD</title>
+        <!--Boostrap's CSS-->
+        <link rel="stylesheet" type="text/css" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+        <!--Custom CSS-->
+        <link rel="stylesheet" type="text/css" href="./css/style.css">
+        <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+        <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="css/custom.css">
+        <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css" >
+        <link href="https://fonts.googleapis.com/css?family=Bungee" rel="stylesheet" type="text/css" >
+        <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.4.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+           <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCk_KZlOSYUDtelmJFruHO4Pr90vuBeACs&callback=initMap">
+    </script>
+        <script src="main.js"></script>
+    </head>
+    <body id ="pagetop" class="index">
+        <div id="fakeLoader"></div>
+
+        <!--nav starts here -->
+<div id="navbar" class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="logo navbar-header"><a class="navbar-brand" href="#">Core Build</a>
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+            </button>
+        </div>
+        <div  class="collapse navbar-collapse navbar-menubuilder" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+
+                <li><a class="page-scroll" href="#pagetop">Home</a></li>
+              
+                <li><a class="page-scroll" href="#AboutMe">About Me</a></li>
+                <li><a class="page-scroll" href="#gallery">Gallery</a></li>
+                <li><a class="page-scroll" href="#booking">Book Online</a></li>
+                <li><a class="page-scroll" href="#contact">Contact Us</a></li>
+         
+                <li><a href="#" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="#" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="#" class="icoLinkedin" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
+  
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+    <!-- nav ends here -->
+<!-- carousel starts here -->
+
+ <div class="carousel fade-carousel slide" data-ride="carousel" data-interval="4000" id="bs-carousel">
+  <!-- Overlay -->
+
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#bs-carousel" data-slide-to="0" class="active"></li>
+    <li data-target="#bs-carousel" data-slide-to="1"></li>
+    <li data-target="#bs-carousel" data-slide-to="2"></li>
+  </ol>
+  
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner">
+    <div class="item slides active">
+      <div class="slide-1">
+          <div class="overlay"></div>
+      </div>
+      <div class="hero">
+        <hgroup>
+            <h1>We are creative</h1>        
+            <h3>Get start your next awesome project</h3>
+        </hgroup>
+       <button class="btn btn-hero btn-lg" role="button"><a href="#gallery">See my gallery</a></button>
+      </div>
+    </div>
+    <div class="item slides">
+      <div class="slide-2">
+          <div class="overlay"></div>
+      </div>
+      <div class="hero">        
+        <hgroup>
+            <h1>We are smart</h1>        
+            <h3>Get start your next awesome project</h3>
+        </hgroup>       
+        <button class="btn btn-hero btn-lg" role="button"><a href="#gallery">See my gallery</a></button>
+      </div>
+    </div>
+    <div class="item slides">
+      <div class="slide-3">
+          <div class="overlay"></div>
+      </div>
+      <div class="hero">        
+        <hgroup>
+            <h1>We are amazing</h1>        
+            <h3>Get start your next awesome project</h3>
+        </hgroup>
+        <button class="btn btn-hero btn-lg" role="button"><a href="#gallery">See my gallery</a></button>
+      </div>
+    </div>
+  </div> 
+</div>
+<!-- About me section -->
+
+<div id= "AboutMe" class="container-fluid">
+    <div class="AboutMe center-text">
+        <h1> About Me</h1>
+        <br>
+        <p> I am an aspiring front end developer who is ready to take on a challenge. 
+            I am using html/css,jquery, and Microsoft Azure to build my websites.
+            I have the ability to implemented JQuery Plug-ins and Facebook sharing, Login or Comments. 
+        </p>
+               <button class="btn btn-hero btn-lg" role="button"><a href="#contact" >Contact Me</a></button>
+    </div>
+</div>
+      <!-- quote here -->
+
+      <h1 id="quote" class= "simple"><em>"</em> Keep it simple<em>"</em>
+        </h1>
+        <!-- quote finished -->
+    <!-- 4 x 2 grid insert here and containter-->
+    
+<div id="gallery" class="container">
+   
+      <h1 class="gallery text-center">Gallery</h1>
+      <br>
+      <div class="row no-gutters">
+        <div class="col-xs-6 col-sm-3 "><img src="/img/1.jpg" alt="kittens"></div>
+        <div class="col-xs-6 col-sm-3 "><img src="/img/2.jpg" alt="kittens"></div>
+        <div class="col-xs-6 col-sm-3 "><img src="/img/3.jpg" alt="kittens"></div>
+        <div class="col-xs-6 col-sm-3 "><img src="/img/4.jpg" alt="kittens"></div>
+      </div>
+    <div class="row no-gutters">
+        <div class="col-xs-6 col-sm-3 "><img src="/img/5.jpg" alt="kittens"></div>
+        <div class="col-xs-6 col-sm-3 "><img src="/img/6.jpg" alt="kittens"></div>
+        <div class="col-xs-6 col-sm-3 "><img src="/img/7.jpg" alt="kittens"></div>
+        <div class="col-xs-6 col-sm-3 k"><img src="/img/8.jpg" alt="kittens"></div>
+      </div>
+    
+</div>
+
+
+      <!-- grid finished -->
+
+
+
+        <!-- Book online starts here --> 
+        
+      <div id ="booking" class="container">
+      <h1 class="book text center"> Book Online</h1>
+
+        <div class="row">
+            <div class="col-sm-2 ">
+            </div>
+            <div class="col-sm-8 contact-form">
+                <form id="contact" method="post" class="form" role="form">
+                <div class="row">
+                    <div class="col-xs-6 col-md-6 form-group">
+                        <input class="form-control" id="name" name="name" placeholder="Name" type="text" required autofocus />
+                    </div>
+                    <div class="col-xs-6 col-md-6 form-group">
+                        <input class="form-control" id="email" name="email" placeholder="Email" type="email" required />
+                    </div>
+                </div>
+                     <textarea class="form-control" id="message" name="message" placeholder="Message" rows="5"></textarea>
+                    <br />
+
+                   
+                <div id="date" class= "col-xs-6 col-md-6 form-group">
+                    
+                     <p>Type or pick a date:</p>
+
+                    <fieldset>
+                    <input type="text" id="input_text">
+                    <input type="text" id="input_date">
+                    </fieldset>
+
+                </div>
+
+                
+
+                 <div class="row">
+                        <div class="col-xs-12 col-md-12 form-group">
+                             <button id ="submit" class="btn btn-primary btn-lg pull-right" type="submit">Submit</button>
+                </form>
+ 
+                    </div>
+                </div>
+        </div>
+        </div>
+      </div>
+<!-- contact us -->
+    <div id="contact" class="contact container-fluid">
+        <h1 class= "contactus"> Contact Us</h1>
+        <br>
+        <i class="phone fa fa-phone" aria-hidden="true" style="font-size:60px"></i>
+        <br>
+        <br>
+        <p>  I am located in the big little city of Auckland in NZ <br>
+            Pay me a visit at<br> 1234 Market Street, <br>Auckland CBD
+        </p>
+    
+    </div>
+      
+
+<!--footer-->
+
+    <div class="container-fluid">
+        <div class="footer">
+                <a href="#" class="icoFacebookf" title="Facebook"><i class="fa fa-facebook"></i></a>
+                <a href="#" class="icoTwitterf" title="Twitter"><i class="fa fa-twitter"></i></a>
+                <a href="#" class="icoLinkedinf" title="Linkedin"><i class="fa fa-linkedin"></i></a>
+           <div id="fb-root"></div>
+                <div class="fb-page" data-href="https://www.facebook.com/microsoftazure/?fref=ts" data-tabs="timeline" data-width="600" data-height="400" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/microsoftazure/?fref=ts" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/microsoftazure/?fref=ts">Microsoft Azure</a></blockquote></div>
+            
+        </div>
+
+        <div id="map"></div>
+   
+     </div>
+
+
+        <div class="bottom text-center">
+            <p> Made with love by Sophie Wang</p>
+<div class="fb-like" data-href="https://www.facebook.com/microsoftazure/?fref=ts" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+       <div class="fb-send" data-href="https://www.facebook.com/microsoftazure/?fref=ts"></div>
+        <div>
+         
+        <!-- 
+            NB: You generally do not want to publically expose the server structure (eg. ./node_modules/...)
+            will sort that in later bootcamps with task-runners and the like.
+            For now this is just a demonstration.
+
+            Alternatively can use CDNs for bootstrap/jquery
+        -->
+
+        <!--jQuery Script-->
+        <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+        <!--Bootstrap Script-->
+        <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+        <!--Custom Script-->
+        <script src="./js/basic.js"></script>
+        
+    </body>
+</html>
