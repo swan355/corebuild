@@ -17,13 +17,33 @@
         <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.4.min.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-           <script async defer
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCk_KZlOSYUDtelmJFruHO4Pr90vuBeACs&callback=initMap">
-    </script>
-        <script src="main.js"></script>
+         <!-- Replace the value of the key parameter with your own API key. -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYfUp5ZTZZVETte77CkFMXSoFIsEEGkKo" async defer></script>
+        <script src="https://connect.soundcloud.com/sdk/sdk-3.1.2.js"></script>
+        <script src="./js/main.js"></script>
     </head>
+   
     <body id ="pagetop" class="index">
-        <div id="fakeLoader"></div>
+        <script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '1288417377857268',
+      xfbml      : true,
+      version    : 'v2.7'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyANw3OU-tUaKIvpHBIBXaD-cckV_UF_bmM&callback=initialize">
+    </script>
 
         <!--nav starts here -->
 <div id="navbar" class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -216,11 +236,38 @@
                 <a href="#" class="icoTwitterf" title="Twitter"><i class="fa fa-twitter"></i></a>
                 <a href="#" class="icoLinkedinf" title="Linkedin"><i class="fa fa-linkedin"></i></a>
            <div id="fb-root"></div>
+       
                 <div class="fb-page" data-href="https://www.facebook.com/microsoftazure/?fref=ts" data-tabs="timeline" data-width="600" data-height="400" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/microsoftazure/?fref=ts" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/microsoftazure/?fref=ts">Microsoft Azure</a></blockquote></div>
+            
             
         </div>
 
-        <div id="map"></div>
+        
+<!-- this is where moodify code starts -->
+
+        <div class="container" id="page-container">
+            <h2 id="app-name">
+                 Mood Detection
+            </h2>
+            <!-- NB: glyphicon halflings are generally not free, but the developer made them free in bootstrap -->
+
+            <h3 id="page-header">
+                We are going to analyse your mood based on a photo of you 
+            </h3>
+            <img id="selected-img" src="">
+            <div class="btn-wrapper">
+                <label class="btn btn-info" for="my-file-selector">
+                    <input id="my-file-selector" type="file">
+                    Upload a picture of you
+                </label>
+                <button type="button" class="btn btn-info" id="refreshbtn">Another mood please</button>
+            </div>
+        </div>
+
+
+<!-- this is wehre it ends -->
+
+  
    
      </div>
 
