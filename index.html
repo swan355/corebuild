@@ -1,297 +1,159 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>CORE BUILD</title>
-        <!--Boostrap's CSS-->
-        <link rel="stylesheet" type="text/css" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
-        <!--Custom CSS-->
-        <link rel="stylesheet" type="text/css" href="./css/style.css">
-        <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
-        <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="css/custom.css">
-        <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css" >
-        <link href="https://fonts.googleapis.com/css?family=Bungee" rel="stylesheet" type="text/css" >
-        <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.4.min.js"></script>
-        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-         <!-- Replace the value of the key parameter with your own API key. -->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYfUp5ZTZZVETte77CkFMXSoFIsEEGkKo" async defer></script>
-        <script src="https://connect.soundcloud.com/sdk/sdk-3.1.2.js"></script>
-        <script src="./js/main.js"></script>
-    </head>
-   
-    <body id ="pagetop" class="index">
-        <script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '1288417377857268',
-      xfbml      : true,
-      version    : 'v2.7'
+$(document).ready(function () {
+    // Add scrollspy to <body>
+    $('body').scrollspy({ target: ".navbar", offset: 50 });
+    // Add smooth scrolling on all links inside the navbar
+    $("#myNavbar a").on('click', function (event) {
+        // Make sure this.hash has a value before overriding default behavior
+        if (this.hash !== "") {
+            // Prevent default anchor click behavior
+            event.preventDefault();
+            // Store hash
+            var hash = this.hash;
+            // Using jQuery's animate() method to add smooth page scroll
+            // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+            $('html, body').animate({
+                scrollTop: $(hash).offset().top
+            }, 1000, function () {
+                // Add hash (#) to URL when done scrolling (default click behavior)
+                window.location.hash = hash;
+            });
+        } // End if
     });
-  };
+    //code for facebook likes
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id))
+            return;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.7";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+    //map
+    var map;
+    function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: { lat: -34.397, lng: 150.644 },
+            zoom: 8
+        });
+    }
 
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "//connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
-</script>
-    <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyANw3OU-tUaKIvpHBIBXaD-cckV_UF_bmM&callback=initialize">
-    </script>
+   //Get jquery objects from DOM
+var pageheader = $("#page-header")[0]; //note the [0], jQuery returns an object, so to get the html DOM object we need the first item in the object
+var pagecontainer = $("#page-container")[0]; 
+var imgSelector = $("#my-file-selector"); //You dont have to use [0], however this just means whenever you use the object you need to refer to it with [0].
+var refreshbtn = $("#refreshbtn"); 
+//Note: changing them all to [0] may prevent some errors when using functions linked to that variable.
 
-        <!--nav starts here -->
-<div id="navbar" class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <div class="container">
-        <div class="logo navbar-header"><a class="navbar-brand" href="#">Core Build</a>
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
-            </button>
-        </div>
-        <div  class="collapse navbar-collapse navbar-menubuilder" id="myNavbar">
-            <ul class="nav navbar-nav navbar-right">
+// Register event listeners
+imgSelector.on("change", function () {
+    pageheader.innerHTML = "Just a sec while we analyse your mood..."; //good to let your user know something is happening!
+    processImage(function (file) { //this checks the extension and file
+        // Get emotions based on image
+        sendEmotionRequest(file, function (emotionScores) { //here we send the API request and get the response
+            // Find out most dominant emotion
+            currentMood = getCurrMood(emotionScores);  //this is where we send out scores to find out the predominant emotion
+            changeUI(); //time to update the web app, with their emotion!
 
-                <li><a class="page-scroll" href="#pagetop">Home</a></li>
-              
-                <li><a class="page-scroll" href="#AboutMe">About Me</a></li>
-                <li><a class="page-scroll" href="#gallery">Gallery</a></li>
-                <li><a class="page-scroll" href="#booking">Book Online</a></li>
-                <li><a class="page-scroll" href="#contact">Contact Us</a></li>
-         
-                <li><a href="#" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
-                <li><a href="#" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
-                <li><a href="#" class="icoLinkedin" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
-  
-            </ul>
-        </div>
-    </div>
-</div>
+            //Done!!
+        });
+    });
+});
 
+refreshbtn.on("click", function () {
+    // Load random song based on mood
+    alert("You clicked the button"); //can demo with sweetAlert plugin
+});
 
-    <!-- nav ends here -->
-<!-- carousel starts here -->
+function processImage(callback) {
+    var file = imgSelector.get(0).files[0]; //get(0) is required as imgSelector is a jQuery object so to get the DOM object, its the first item in the object. files[0] refers to the location of the photo we just chose.
+     var reader = new FileReader();
+    if (file) {
+        reader.readAsDataURL(file); //used to read the contents of the file
+    }
+    else {
+        console.log("Invalid file");
+    }
+    reader.onloadend = function () {
+        //After loading the file it checks if extension is jpg or png and if it isnt it lets the user know.
+        if (!file.name.match(/\.(jpg|jpeg|png)$/)) {
+            pageheader.innerHTML = "Please upload an image file (jpg or png).";
+        }
+        else {
+            //if file is photo it sends the file reference back up
+            callback(file);
+        }
+    };
+};
 
- <div class="carousel fade-carousel slide" data-ride="carousel" data-interval="4000" id="bs-carousel">
-  <!-- Overlay -->
+var Mood = (function () {       //Creating a Mood object which has the mood as a string and its corresponding emoji
+    function Mood(mood, emojiurl) {
+        this.mood = mood;
+        this.emojiurl = emojiurl;
+        this.name = mood;
+        this.emoji = emojiurl;
+    }
+    return Mood;
+}());
 
-  <!-- Indicators -->
-  <ol class="carousel-indicators">
-    <li data-target="#bs-carousel" data-slide-to="0" class="active"></li>
-    <li data-target="#bs-carousel" data-slide-to="1"></li>
-    <li data-target="#bs-carousel" data-slide-to="2"></li>
-  </ol>
-  
-  <!-- Wrapper for slides -->
-  <div class="carousel-inner">
-    <div class="item slides active">
-      <div class="slide-1">
-          <div class="overlay"></div>
-      </div>
-      <div class="hero">
-        <hgroup>
-            <h1>We are creative</h1>        
-            <h3>Get start your next awesome project</h3>
-        </hgroup>
-       <button class="btn btn-hero btn-lg" role="button"><a href="#gallery">See my gallery</a></button>
-      </div>
-    </div>
-    <div class="item slides">
-      <div class="slide-2">
-          <div class="overlay"></div>
-      </div>
-      <div class="hero">        
-        <hgroup>
-            <h1>We are smart</h1>        
-            <h3>Get start your next awesome project</h3>
-        </hgroup>       
-        <button class="btn btn-hero btn-lg" role="button"><a href="#gallery">See my gallery</a></button>
-      </div>
-    </div>
-    <div class="item slides">
-      <div class="slide-3">
-          <div class="overlay"></div>
-      </div>
-      <div class="hero">        
-        <hgroup>
-            <h1>We are amazing</h1>        
-            <h3>Get start your next awesome project</h3>
-        </hgroup>
-        <button class="btn btn-hero btn-lg" role="button"><a href="#gallery">See my gallery</a></button>
-      </div>
-    </div>
-  </div> 
-</div>
-<!-- About me section -->
+var happy = new Mood("happy", "http://emojipedia-us.s3.amazonaws.com/cache/a0/38/a038e6d3f342253c5ea3c057fe37b41f.png");
+var sad = new Mood("sad", "https://cdn.shopify.com/s/files/1/1061/1924/files/Sad_Face_Emoji.png?9898922749706957214");
+var angry = new Mood("angry", "https://cdn.shopify.com/s/files/1/1061/1924/files/Very_Angry_Emoji.png?9898922749706957214");
+var neutral = new Mood("neutral", "https://cdn.shopify.com/s/files/1/1061/1924/files/Neutral_Face_Emoji.png?9898922749706957214");
 
-<div id= "AboutMe" class="container-fluid">
-    <div class="AboutMe center-text">
-        <h1> About Me</h1>
-        <br>
-        <p> I am an aspiring front end developer who is ready to take on a challenge. 
-            I am using html/css,jquery, and Microsoft Azure to build my websites.
-            I have the ability to implemented JQuery Plug-ins and Facebook sharing, Login or Comments. 
-        </p>
-               <button class="btn btn-hero btn-lg" role="button"><a href="#contact" >Contact Me</a></button>
-    </div>
-</div>
-      <!-- quote here -->
+function getCurrMood(scores) {
+    var currentMood;
+    // In a practical sense, you would find the max emotion out of all the emotions provided. However we'll do the below just for simplicity's sake :P
+    if (scores.happiness > 0.4) {
+        currentMood = happy;
+    }
+    else if (scores.sadness > 0.4) {
+        currentMood = sad;
+    }
+    else if (scores.anger > 0.4) {
+        currentMood = angry;
+    }
+    else {
+        currentMood = neutral;
+    }
+    return currentMood;
+}
 
-      <h1 id="quote" class= "simple"><em>"</em> Keep it simple<em>"</em>
-        </h1>
-        <!-- quote finished -->
-    <!-- 4 x 2 grid insert here and containter-->
-    
-<div id="gallery" class="container">
-   
-      <h1 class="gallery text-center">Gallery</h1>
-      <br>
-      <div class="row no-gutters">
-        <div class="col-xs-6 col-sm-3 "><img src="/img/1.jpg" alt="kittens"></div>
-        <div class="col-xs-6 col-sm-3 "><img src="/img/2.jpg" alt="kittens"></div>
-        <div class="col-xs-6 col-sm-3 "><img src="/img/3.jpg" alt="kittens"></div>
-        <div class="col-xs-6 col-sm-3 "><img src="/img/4.jpg" alt="kittens"></div>
-      </div>
-    <div class="row no-gutters">
-        <div class="col-xs-6 col-sm-3 "><img src="/img/5.jpg" alt="kittens"></div>
-        <div class="col-xs-6 col-sm-3 "><img src="/img/6.jpg" alt="kittens"></div>
-        <div class="col-xs-6 col-sm-3 "><img src="/img/7.jpg" alt="kittens"></div>
-        <div class="col-xs-6 col-sm-3 k"><img src="/img/8.jpg" alt="kittens"></div>
-      </div>
-    
-</div>
+// Manipulate the DOM
+function changeUI() {
+    //Show detected mood
+    pageheader.innerHTML = "Your mood is: " + currentMood.name;  //Remember currentMood is a Mood object, which has a name and emoji linked to it. 
+    //Show mood emoji
+    var img = document.getElementById("selected-img"); //getting a predefined area on our webpage to show the emoji
+    img.src = currentMood.emoji; //link that area to the emoji of our currentMood.
+    img.style.display = "inline"; //just some formating of the emoji's location
 
+}
 
-      <!-- grid finished -->
-
-
-
-        <!-- Book online starts here --> 
-        
-      <div id ="booking" class="container">
-      <h1 class="book text center"> Book Online</h1>
-
-        <div class="row">
-            <div class="col-sm-2 ">
-            </div>
-            <div class="col-sm-8 contact-form">
-                <form id="contact" method="post" class="form" role="form">
-                <div class="row">
-                    <div class="col-xs-6 col-md-6 form-group">
-                        <input class="form-control" id="name" name="name" placeholder="Name" type="text" required autofocus />
-                    </div>
-                    <div class="col-xs-6 col-md-6 form-group">
-                        <input class="form-control" id="email" name="email" placeholder="Email" type="email" required />
-                    </div>
-                </div>
-                     <textarea class="form-control" id="message" name="message" placeholder="Message" rows="5"></textarea>
-                    <br />
-
-                   
-                <div id="date" class= "col-xs-6 col-md-6 form-group">
-                    
-                     <p>Type or pick a date:</p>
-
-                    <fieldset>
-                    <input type="text" id="input_text">
-                    <input type="text" id="input_date">
-                    </fieldset>
-
-                </div>
-
-                
-
-                 <div class="row">
-                        <div class="col-xs-12 col-md-12 form-group">
-                             <button id ="submit" class="btn btn-primary btn-lg pull-right" type="submit">Submit</button>
-                </form>
- 
-                    </div>
-                </div>
-        </div>
-        </div>
-      </div>
-<!-- contact us -->
-    <div id="contact" class="contact container-fluid">
-        <h1 class= "contactus"> Contact Us</h1>
-        <br>
-        <i class="phone fa fa-phone" aria-hidden="true" style="font-size:60px"></i>
-        <br>
-        <br>
-        <p>  I am located in the big little city of Auckland in NZ <br>
-            Pay me a visit at<br> 1234 Market Street, <br>Auckland CBD
-        </p>
-    
-    </div>
-      
-
-<!--footer-->
-
-    <div class="container-fluid">
-        <div class="footer">
-                <a href="#" class="icoFacebookf" title="Facebook"><i class="fa fa-facebook"></i></a>
-                <a href="#" class="icoTwitterf" title="Twitter"><i class="fa fa-twitter"></i></a>
-                <a href="#" class="icoLinkedinf" title="Linkedin"><i class="fa fa-linkedin"></i></a>
-           <div id="fb-root"></div>
-       
-                <div class="fb-page" data-href="https://www.facebook.com/microsoftazure/?fref=ts" data-tabs="timeline" data-width="600" data-height="400" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/microsoftazure/?fref=ts" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/microsoftazure/?fref=ts">Microsoft Azure</a></blockquote></div>
-            
-            
-        </div>
-
-        
-<!-- this is where moodify code starts -->
-
-        <div class="container" id="page-container">
-            <h2 id="app-name">
-                 Mood Detection
-            </h2>
-            <!-- NB: glyphicon halflings are generally not free, but the developer made them free in bootstrap -->
-
-            <h3 id="page-header">
-                We are going to analyse your mood based on a photo of you 
-            </h3>
-            <img id="selected-img" src="">
-            <div class="btn-wrapper">
-                <label class="btn btn-info" for="my-file-selector">
-                    <input id="my-file-selector" type="file">
-                    Upload a picture of you
-                </label>
-                <button type="button" class="btn btn-info" id="refreshbtn">Another mood please</button>
-            </div>
-        </div>
-
-
-<!-- this is wehre it ends -->
-
-  
-   
-     </div>
-
-
-        <div class="bottom text-center">
-            <p> Made with love by Sophie Wang</p>
-<div class="fb-like" data-href="https://www.facebook.com/microsoftazure/?fref=ts" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
-       <div class="fb-send" data-href="https://www.facebook.com/microsoftazure/?fref=ts"></div>
-        <div>
-         
-        <!-- 
-            NB: You generally do not want to publically expose the server structure (eg. ./node_modules/...)
-            will sort that in later bootcamps with task-runners and the like.
-            For now this is just a demonstration.
-
-            Alternatively can use CDNs for bootstrap/jquery
-        -->
-
-        <!--jQuery Script-->
-        <script src="./node_modules/jquery/dist/jquery.min.js"></script>
-        <!--Bootstrap Script-->
-        <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-        <!--Custom Script-->
-        <script src="./js/main.js"></script>
-        
-    </body>
-</html>
+function sendEmotionRequest(file, callback) {
+    $.ajax({
+        url: "https://api.projectoxford.ai/emotion/v1.0/recognize",
+        beforeSend: function (xhrObj) {
+            // Request headers
+            xhrObj.setRequestHeader("Content-Type", "application/octet-stream");
+            xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key", "3ace581ddceda40fa4210596df748c50");
+        },
+        type: "POST",
+        data: file,
+        processData: false
+    })
+        .done(function (data) {
+            if (data.length != 0) { // if a face is detected
+                // Get the emotion scores
+                var scores = data[0].scores;
+                callback(scores);
+            } else {
+                pageheader.innerHTML = "Hmm, we can't detect a human face in that photo. Try another?";
+            }
+        })
+        .fail(function (error) {
+            pageheader.innerHTML = "Sorry, something went wrong. :( Try again in a bit?";
+            console.log(error.getAllResponseHeaders());
+        });
+}
+});
